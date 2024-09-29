@@ -1,0 +1,10 @@
+.idea/
+__pycache__/
+
+dataset/
+model/
+runs/
+run/
+venv/
+
+tes.py
