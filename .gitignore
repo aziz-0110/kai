@@ -7,4 +7,4 @@ runs/
 run/
 venv/
 
-tes.py
+tes_multitread.py

@@ -3,9 +3,8 @@ import numpy as np
 from ultralytics import YOLO
 from PyQt5.QtCore import QThread, pyqtSignal
 
-
 class Model(QThread):
-    signal_slot = pyqtSignal(np.ndarray, np.ndarray)
+    signal_slot = pyqtSignal(np.ndarray, np.ndarray, int, int)
 
     def __init__(self, path_vid, playing):
         super().__init__()
@@ -18,13 +17,37 @@ class Model(QThread):
         while self.playing:
             ret, frame = self.cap.read()
             if not ret:
+                self.cap = None
                 break
 
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             results = self.model(frame)
             predic_frame = results[0].plot()
 
-            self.signal_slot.emit(frame, predic_frame)
+            cal_com, cal_incom = 0, 0
+
+            for r in results:
+                boxes = r.boxes.cpu()
+                cls = boxes.cls.tolist()
+
+                com = cls.count(0)
+                incom = cls.count(1)
+                total = len(cls)
+
+                # cal_com = int((com/total)*100)
+                # cal_incom = int((incom/total)*100)
+
+            # predic_frame = cv2.cvtColor(predic_frame, cv2.COLOR_BGR2RGB)
+            self.signal_slot.emit(frame, predic_frame, com, incom)
+
+    def skipFrame(self, condition):
+        if(self.cap != None):
+            self.playing = False
+            current_frame = int(self.cap.get(cv2.CAP_PROP_POS_FRAMES))
+            frame_skip = current_frame + 20 if condition == 1 else current_frame - 20
+            self.cap.set(cv2.CAP_PROP_POS_FRAMES, frame_skip)
+            self.playing = True
+            self.start()
 
     def stop(self):
         self.playing = False

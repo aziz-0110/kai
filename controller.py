@@ -3,9 +3,14 @@ from PyQt5 import QtCore
 import cv2
 
 from model import Model
-from view import Ui_Form
+from view_rev import Ui_Form
 
-
+""" 
+masih ada bug di skip frame
+panggil grafik model dan tabel setelah video selesai
+informasi video msih blm jalan
+pembuatan tabel masih bisa di optimasi
+"""
 
 class Controller:
     def __init__(self,view):
@@ -14,79 +19,71 @@ class Controller:
         # self.ui = Ui_Form()
         self.cap, self.timer = None, None
         self.playing = False
+
         self.setup()
 
     def setup(self):
         self.ui.pushButton_2.clicked.connect(lambda : self.load_video())
         self.ui.pushButton_3.clicked.connect(self.clear)
         self.ui.pushButton_play.clicked.connect(self.play_or_pause)
-        self.ui.pushButton_forward.clicked.connect(lambda : self.skipFrame(0))
-        self.ui.pushButton_backward.clicked.connect(lambda : self.skipFrame(1))
-
-    # def load_video(self):
-    #     # file = QFileDialog.getOpenFileName(filter="Video (*.mp4)")[0]
-    #     file = "dataset/cut.mp4"
-    #
-    #     if file != '':
-    #         self.cap = cv2.VideoCapture(file)
-    #         self.playing = True
-    #
-    #         self.timer = QtCore.QTimer()
-    #         self.timer.timeout.connect(self.update_frame)
-    #         # self.timer.start()
-    #         self.timer.start(30)
+        self.ui.pushButton_forward.clicked.connect(lambda : self.model.skipFrame(1))
+        self.ui.pushButton_backward.clicked.connect(lambda : self.model.skipFrame(0))
 
     def load_video(self):
-        # file = QFileDialog.getOpenFileName(filter="Video (*.mp4)")[0]
-        file = "dataset/cut.mp4"
+        file = QFileDialog.getOpenFileName(filter="Video (*.mp4)")[0]
+
+        # file = "dataset/cut.mp4"
 
         if file != '':
             self.cap = file
-            self.playing = True
-            self.model = Model(file, self.playing)
+            # self.playing = True
+
+            self.model = Model(file , True)
             self.model.signal_slot.connect(self.ui.update_img)
 
             self.model.start()
+            self.ui.setIconPlay(1)
 
-    def closeEvent(self, event):
-        self.model.stop()
-
-    def update_frame(self):
-        if self.playing:
-            ret, frame_ori, frame_predict = self.model.predict(self.cap)
-
-            if ret:
-                self.ui.set_image(self.ui.label_ori, frame_ori)
-                self.ui.set_image(self.ui.label_dp, frame_predict)
-                self.ui.setIconPlay(1)
-            else:
-                self.ui.setIconPlay(0)
+        self.graphModels()
 
     def play_or_pause(self):
         if self.cap != None:
-            if self.playing:
-                self.playing = False
+            if self.model.playing:
+                self.model.playing = False
                 self.ui.setIconPlay(0)
             else:
-                self.playing = True
+                self.model.playing = True
                 self.ui.setIconPlay(1)
-                self.update_frame()
+                self.model.start()
 
-    def skipFrame(self, condition):
-        if self.cap != None:
-            curren_frame = int(self.cap.get(cv2.CAP_PROP_POS_FRAMES))
-            frame_skip = curren_frame + 20 if condition == 0 else curren_frame - 20
-            self.cap.set(cv2.CAP_PROP_POS_FRAMES, frame_skip)
+    def graphModels(self):
+        img_graph = {
+            'g_1': ["model/graph/graph_accurasy.png", self.ui.label_graph_mdl_1],
+            'g_2': ["model/graph/graph_loss.png", self.ui.label_graph_mdl_2],
+            'g_3': ["model/graph/P_curve.png", self.ui.label_graph_mdl_5],
+            'g_4': ["model/graph/PR_curve.png", self.ui.label_graph_mdl_6],
+            'g_5': ["model/graph/R_curve.png", self.ui.label_graph_mdl_7],
+            'g_6': ["model/graph/F1_curve.png", self.ui.label_graph_mdl_8],
+        }
+
+        for key, val in img_graph.items():
+            img = cv2.imread(val[0])
+
+            self.ui.graphModel(img, val[1])
 
     def clear(self):
         self.cap, self.playing = None, False
-        self.ui.label_dp.setText(" ")
+        self.ui.label_result.setText(" ")
         self.ui.label_ori.setText(" ")
-        self.ui.label_indi_dp.setText("Indikator")
+        self.ui.label_indi.setText("Indikator")
         self.ui.name_file.setText(" ")
         self.ui.label_resolusi.setText(" ")
         self.ui.label_time_pro.setText(" ")
         self.ui.label_status.setText(" ")
+        self.model.stop()
+
+    def closeEvent(self, event):
+        self.model.stop()
 
 def main():
     import  sys
