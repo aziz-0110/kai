@@ -5,6 +5,7 @@ from PyQt5.QtCore import QThread, pyqtSignal
 
 class Model(QThread):
     signal_slot = pyqtSignal(np.ndarray, np.ndarray, int, int)
+    video_finished = pyqtSignal()
 
     def __init__(self, path_vid, playing):
         super().__init__()
@@ -14,6 +15,7 @@ class Model(QThread):
         self.playing = playing
 
     def run(self):
+        k = 0
         while self.playing:
             ret, frame = self.cap.read()
             if not ret:
@@ -38,6 +40,10 @@ class Model(QThread):
                 # cal_incom = int((incom/total)*100)
 
             # predic_frame = cv2.cvtColor(predic_frame, cv2.COLOR_BGR2RGB)
+            if k == 0:
+                self.video_finished.emit()
+                k += 1
+                
             self.signal_slot.emit(frame, predic_frame, com, incom)
 
     def skipFrame(self, condition):

@@ -29,22 +29,31 @@ class Controller:
         self.ui.pushButton_forward.clicked.connect(lambda : self.model.skipFrame(1))
         self.ui.pushButton_backward.clicked.connect(lambda : self.model.skipFrame(0))
 
-    def load_video(self):
-        file = QFileDialog.getOpenFileName(filter="Video (*.mp4)")[0]
+        self.ui.frame_14.hide()
+        self.ui.frame_16.hide()
+        self.ui.frame_17.hide()
 
-        # file = "dataset/cut.mp4"
+
+    def load_video(self):
+        import os
+        # file = QFileDialog.getOpenFileName(filter="Video (*.mp4)")[0]
+        file = "dataset/cut.mp4"
+
+        name_file = file.split('/')[-1] 
 
         if file != '':
             self.cap = file
             # self.playing = True
+            self.ui.name_file.setText(name_file)
 
             self.model = Model(file , True)
             self.model.signal_slot.connect(self.ui.update_img)
 
+            self.model.video_finished.connect(self.graphModels)
+
             self.model.start()
             self.ui.setIconPlay(1)
 
-        self.graphModels()
 
     def play_or_pause(self):
         if self.cap != None:
@@ -75,7 +84,7 @@ class Controller:
         self.cap, self.playing = None, False
         self.ui.label_result.setText(" ")
         self.ui.label_ori.setText(" ")
-        self.ui.label_indi.setText("Indikator")
+        # self.ui.label_indi.setText("Indikator")
         self.ui.name_file.setText(" ")
         self.ui.label_resolusi.setText(" ")
         self.ui.label_time_pro.setText(" ")
