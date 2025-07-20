@@ -1,7 +1,6 @@
 from PyQt5.QtWidgets import QApplication, QFileDialog
 from PyQt5 import QtCore
 import cv2
-
 from model import Model
 from view_rev import Ui_Form
 
