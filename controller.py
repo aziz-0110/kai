@@ -89,7 +89,16 @@ class Controller:
         self.ui.label_resolusi.setText(" ")
         self.ui.label_time_pro.setText(" ")
         self.ui.label_status.setText(" ")
+        self.ui.label_graph_mdl_1.setText(" ")
+        self.ui.label_graph_mdl_2.setText(" ")
+        self.ui.label_graph_mdl_6.setText(" ")
+        self.ui.label_graph_mdl_7.setText(" ")
+        self.ui.label_graph_mdl_8.setText(" ")
+        self.ui.label_graph_mdl_5.setText(" ")
+
         self.model.stop()
+        self.ui.complite_line.setData([], [])
+        self.ui.incomplite_line.setData([], [])
 
     def closeEvent(self, event):
         self.model.stop()

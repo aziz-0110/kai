@@ -6,5 +6,6 @@ model/
 runs/
 run/
 venv/
+*.mp4
 
 tes_multitread.py

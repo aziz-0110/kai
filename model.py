@@ -23,7 +23,7 @@ class Model(QThread):
                 break
 
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            results = self.model(frame)
+            results = self.model.predict(frame, conf=0.3, iou=0.01)
             predic_frame = results[0].plot()
 
             cal_com, cal_incom = 0, 0
