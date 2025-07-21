@@ -1,7 +1,7 @@
 # Telkom University 
 Download dataset [here](https://drive.google.com/drive/folders/189E6QZ9xngsbvkVNMAlpvhBpIbeAbgHJ?usp=sharing)
 
-Download model [here]([https://drive.google.com/drive/folders/1_Wfis4XFtKaINwVQHnnMtDeMCNVg2-2v?usp=drive_link](https://drive.google.com/file/d/1YbxmIOy7zK0pfqF1JuWXLRcV1oV0r1_y/view?usp=drive_link))
+Download model and graph [here]([https://drive.google.com/drive/folders/1_Wfis4XFtKaINwVQHnnMtDeMCNVg2-2v?usp=drive_link](https://drive.google.com/file/d/1YbxmIOy7zK0pfqF1JuWXLRcV1oV0r1_y/view?usp=drive_link)
 
 ## Usage
 1. Clone the repository
