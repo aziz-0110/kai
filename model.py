@@ -11,7 +11,7 @@ class Model(QThread):
         super().__init__()
         self.path_vid = path_vid
         self.cap = cv2.VideoCapture(path_vid)
-        self.model = YOLO("model/model.pt")
+        self.model = YOLO("model/best1.pt")
         self.playing = playing
 
     def run(self):

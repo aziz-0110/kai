@@ -28,15 +28,15 @@ class Controller:
         self.ui.pushButton_forward.clicked.connect(lambda : self.model.skipFrame(1))
         self.ui.pushButton_backward.clicked.connect(lambda : self.model.skipFrame(0))
 
-        self.ui.frame_14.hide()
-        self.ui.frame_16.hide()
-        self.ui.frame_17.hide()
+        # self.ui.frame_14.hide()
+        # self.ui.frame_16.hide()
+        # self.ui.frame_17.hide()
 
 
     def load_video(self):
         import os
-        # file = QFileDialog.getOpenFileName(filter="Video (*.mp4)")[0]
-        file = "dataset/cut.mp4"
+        file = QFileDialog.getOpenFileName(filter="Video (*.mp4)")[0]
+        # file = "dataset/cut.mp4"
 
         name_file = file.split('/')[-1] 
 
@@ -85,9 +85,6 @@ class Controller:
         self.ui.label_ori.setText(" ")
         # self.ui.label_indi.setText("Indikator")
         self.ui.name_file.setText(" ")
-        self.ui.label_resolusi.setText(" ")
-        self.ui.label_time_pro.setText(" ")
-        self.ui.label_status.setText(" ")
         self.ui.label_graph_mdl_1.setText(" ")
         self.ui.label_graph_mdl_2.setText(" ")
         self.ui.label_graph_mdl_6.setText(" ")
@@ -98,6 +95,8 @@ class Controller:
         self.model.stop()
         self.ui.complite_line.setData([], [])
         self.ui.incomplite_line.setData([], [])
+        self.ui.tableView.clear()
+        self.ui.setupTable()
 
     def closeEvent(self, event):
         self.model.stop()
@@ -109,7 +108,7 @@ def main():
     view = Ui_Form()
     Controller(view)
 
-    view.setWindowTitle("kai")
+    view.setWindowTitle("Maintenance KAI System")
     view.show()
 
     sys.exit(app.exec_())
