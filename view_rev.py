@@ -19,15 +19,17 @@ pg.setConfigOption('foreground', 'k')
 class Ui_Form(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
-        self.complite = []
-        self.incomplite = []
+        self.complite_left = []
+        self.incomplite_left = []
+        self.complite_right = []
+        self.incomplite_right = []
         self.tableView =pg.TableWidget()
         self.setupUi(self)
 
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(1280, 720)
-        Form.setStyleSheet("")
+        Form.setStyleSheet("background-color: rgb(222, 221, 218);")
         self.gridLayout = QtWidgets.QGridLayout(Form)
         self.gridLayout.setContentsMargins(9, 9, 9, 9)
         self.gridLayout.setObjectName("gridLayout")
@@ -46,6 +48,10 @@ class Ui_Form(QtWidgets.QWidget):
         self.frame.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
+
+        # self.verticalLayout_frame = QtWidgets.QVBoxLayout(self.frame)
+        # self.verticalLayout_7 = QtWidgets.QSplitter(QtCore.Qt.Vertical)
+
         self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.frame)
         self.verticalLayout_7.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_7.setSpacing(6)
@@ -64,27 +70,58 @@ class Ui_Form(QtWidgets.QWidget):
         self.verticalLayout_2.setContentsMargins(9, 9, 9, 9)
         self.verticalLayout_2.setSpacing(9)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.label_2 = QtWidgets.QLabel(self.frame_3)
+        # self.label_2 = QtWidgets.QLabel(self.frame_3)
 
-        self.label_2.setMinimumSize(0, 48)
-        self.label_2.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        # self.label_2.setMinimumSize(0, 48)
+        # self.label_2.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        # self.label_2.setSizePolicy(QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Ignored)
+
+        # self.label_2.setText("")
+        # self.label_2.setPixmap(QtGui.QPixmap("icon/logo kai.png"))
+        # self.label_2.setScaledContents(True)
+        # self.label_2.setObjectName("label_2")
+        # self.verticalLayout_2.addWidget(self.label_2)
+
+        self.frame_10 = QtWidgets.QFrame(self.frame_3)
+        self.frame_10.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_10.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_10.setObjectName("frame_10")
+        self.gridLayout_2 = QtWidgets.QGridLayout(self.frame_10)
+        self.gridLayout_2.setObjectName("gridLayout_2")
+        self.label_2 = QtWidgets.QLabel(self.frame_10)
+
+        # self.label_2.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.frame_10.setMaximumSize(QtCore.QSize(16777215, 130))
+        # self.label_2.setMinimumSize(0, 48)
         self.label_2.setSizePolicy(QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Ignored)
 
         self.label_2.setText("")
         self.label_2.setPixmap(QtGui.QPixmap("icon/logo kai.png"))
         self.label_2.setScaledContents(True)
         self.label_2.setObjectName("label_2")
-        self.verticalLayout_2.addWidget(self.label_2)
+
+        self.gridLayout_2.addWidget(self.label_2, 0, 0, 1, 1)
+        self.label_3 = QtWidgets.QLabel(self.frame_10)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_3.setFont(font)
+        self.label_3.setObjectName("label_3")
+        self.label_3.setText("| Smart Transfortation and Robotics (STAR)")
+        self.gridLayout_2.addWidget(self.label_3, 0, 1, 1, 1)
+        self.verticalLayout_2.addWidget(self.frame_10)
 
         self.label = QtWidgets.QLabel(self.frame_3)
         self.label.setMaximumSize(QtCore.QSize(16777215, 80))
+        self.label.setMinimumSize(QtCore.QSize(0, 80))
         font = QtGui.QFont()
         font.setPointSize(13)
         font.setBold(True)
         font.setWeight(75)
         self.label.setFont(font)
-        self.label.setStyleSheet("background-color: rgb(244, 123, 32);\n"
-"color: rgb(255, 255, 255);")
+        self.label.setStyleSheet("background-color: rgb(192, 192, 192);\n"
+"color: rgb(0, 0, 0);")
         self.label.setFrameShape(QtWidgets.QFrame.Box)
         self.label.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
@@ -123,7 +160,7 @@ class Ui_Form(QtWidgets.QWidget):
         self.horizontalLayout_2.addWidget(self.radioButton_norecord)
         self.verticalLayout_2.addWidget(self.frame_10)
         self.frame_9 = QtWidgets.QFrame(self.frame_3)
-        self.frame_9.setMaximumSize(QtCore.QSize(16777215, 140))
+        self.frame_9.setMaximumSize(QtCore.QSize(16777215, 80))
         self.frame_9.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.frame_9.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_9.setObjectName("frame_9")
@@ -192,13 +229,14 @@ class Ui_Form(QtWidgets.QWidget):
         self.verticalLayout_13.setObjectName("verticalLayout_13")
         self.label_11 = QtWidgets.QLabel(self.frame_19)
         self.label_11.setMaximumSize(QtCore.QSize(16777215, 80))
+        self.label_11.setMinimumSize(QtCore.QSize(0, 80))
         font = QtGui.QFont()
         font.setPointSize(13)
         font.setBold(True)
         font.setWeight(75)
         self.label_11.setFont(font)
-        self.label_11.setStyleSheet("background-color: rgb(244, 123, 32);\n"
-"color: rgb(255, 255, 255);")
+        self.label_11.setStyleSheet("background-color: rgb(192, 192, 192);\n"
+"color: rgb(0, 0, 0);")
         self.label_11.setFrameShape(QtWidgets.QFrame.Box)
         self.label_11.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.label_11.setAlignment(QtCore.Qt.AlignCenter)
@@ -213,8 +251,15 @@ class Ui_Form(QtWidgets.QWidget):
         self.verticalLayout_13.addWidget(self.tableView)
 
        
-
         self.verticalLayout_7.addWidget(self.frame_19)
+        # self.verticalLayout_7.setSizes([500, 800])
+
+        # self.verticalLayout_frame.addWidget(self.verticalLayout_7)
+        # self.frame.setLayout(None)
+        # self.splitter.addWidget(self.verticalLayout_7)
+
+
+
         self.splitter.addWidget(self.frame)
         self.frame_5 = QtWidgets.QFrame(self.frame_11)
         self.frame_5.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -250,8 +295,8 @@ class Ui_Form(QtWidgets.QWidget):
         font.setBold(True)
         font.setWeight(75)
         self.label_12.setFont(font)
-        self.label_12.setStyleSheet("background-color: rgb(244, 123, 32);\n"
-"color: rgb(255, 255, 255);")
+        self.label_12.setStyleSheet("background-color: rgb(192, 192, 192);\n"
+"color: rgb(0, 0, 0);")
         self.label_12.setFrameShape(QtWidgets.QFrame.Box)
         self.label_12.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.label_12.setAlignment(QtCore.Qt.AlignCenter)
@@ -312,8 +357,8 @@ class Ui_Form(QtWidgets.QWidget):
         font.setBold(True)
         font.setWeight(75)
         self.label_7.setFont(font)
-        self.label_7.setStyleSheet("background-color: rgb(244, 123, 32);\n"
-"color: rgb(255, 255, 255);")
+        self.label_7.setStyleSheet("background-color: rgb(192, 192, 192);\n"
+"color: rgb(0, 0, 0);")
         self.label_7.setFrameShape(QtWidgets.QFrame.Box)
         self.label_7.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.label_7.setAlignment(QtCore.Qt.AlignCenter)
@@ -436,7 +481,7 @@ class Ui_Form(QtWidgets.QWidget):
         self.verticalLayout_5.addWidget(self.frame_12)
         self.splitter.addWidget(self.frame_5)
 
-        self.splitter.setSizes([200, 800])
+        self.splitter.setSizes([500, 1500])
         self.gridLayout.addWidget(self.splitter)
 
         self.gridLayout.addWidget(self.frame_11, 0, 0, 1, 1)
@@ -464,8 +509,8 @@ class Ui_Form(QtWidgets.QWidget):
         font.setBold(True)
         font.setWeight(75)
         self.label_9.setFont(font)
-        self.label_9.setStyleSheet("background-color: rgb(244, 123, 32);\n"
-"color: rgb(255, 255, 255);")
+        self.label_9.setStyleSheet("background-color: rgb(192, 192, 192);\n"
+"color: rgb(0, 0, 0);")
         self.label_9.setFrameShape(QtWidgets.QFrame.Box)
         self.label_9.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.label_9.setAlignment(QtCore.Qt.AlignCenter)
@@ -490,16 +535,16 @@ class Ui_Form(QtWidgets.QWidget):
         self.horizontalLayout_6 = QtWidgets.QHBoxLayout(self.frame_21)
         self.horizontalLayout_6.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_6.setObjectName("horizontalLayout_6")
-        self.label_graph_mdl_1 = QtWidgets.QLabel(self.frame_21)
-        self.label_graph_mdl_1.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.label_graph_mdl_1.setText("")
-        self.label_graph_mdl_1.setObjectName("label_graph_mdl_1")
-        self.horizontalLayout_6.addWidget(self.label_graph_mdl_1)
-        self.label_graph_mdl_2 = QtWidgets.QLabel(self.frame_21)
-        self.label_graph_mdl_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.label_graph_mdl_2.setText("")
-        self.label_graph_mdl_2.setObjectName("label_graph_mdl_2")
-        self.horizontalLayout_6.addWidget(self.label_graph_mdl_2)
+        # self.label_graph_mdl_1 = QtWidgets.QLabel(self.frame_21)
+        # self.label_graph_mdl_1.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        # self.label_graph_mdl_1.setText("")
+        # self.label_graph_mdl_1.setObjectName("label_graph_mdl_1")
+        # self.horizontalLayout_6.addWidget(self.label_graph_mdl_1)
+        # self.label_graph_mdl_2 = QtWidgets.QLabel(self.frame_21)
+        # self.label_graph_mdl_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        # self.label_graph_mdl_2.setText("")
+        # self.label_graph_mdl_2.setObjectName("label_graph_mdl_2")
+        # self.horizontalLayout_6.addWidget(self.label_graph_mdl_2)
         # self.label_graph_mdl_3 = QtWidgets.QLabel(self.frame_21)
         # sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Ignored)
         # sizePolicy.setHorizontalStretch(0)
@@ -520,40 +565,57 @@ class Ui_Form(QtWidgets.QWidget):
         # self.label_graph_mdl_4.setText("")
         # self.label_graph_mdl_4.setObjectName("label_graph_mdl_4")
         # self.horizontalLayout_6.addWidget(self.label_graph_mdl_4)
-
-        self.graph_comp = PlotWidget(Form)
-
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.graph_comp.sizePolicy().hasHeightForWidth())
-        self.graph_comp.setSizePolicy(sizePolicy)
 
-        self.graph_comp.setBackground("w")      # w = white
-        # self.graph_comp.drawForeground("k")
-        self.graph_comp.showGrid(x=True, y=True)
-        self.graph_comp.setLabels(left='Percentage', bottom='Complite')
-        self.graph_comp.setObjectName('graph_comp')
-        self.horizontalLayout_6.addWidget(self.graph_comp)
+        self.graph_comp_left = PlotWidget(Form)
+        sizePolicy.setHeightForWidth(self.graph_comp_left.sizePolicy().hasHeightForWidth())
+        self.graph_comp_left.setSizePolicy(sizePolicy)
+        self.graph_comp_left.setBackground("w")      # w = white
+        # self.graph_comp_left.drawForeground("k")
+        self.graph_comp_left.showGrid(x=True, y=True)
+        self.graph_comp_left.setLabels(left='Percentage', bottom='Complite Left')
+        self.graph_comp_left.setObjectName('graph_comp_left')
+        self.horizontalLayout_6.addWidget(self.graph_comp_left)
 
-        self.complite_line = self.graph_comp.plot([], pen=pg.mkPen(0, 255, 0))
+        self.complite_line_left = self.graph_comp_left.plot([], pen=pg.mkPen(color=(8, 165, 0), width=8))
 
-        # self.label_graph_mdl_4 = QtWidgets.QLabel(self.frame_21)
-        # self.label_graph_mdl_4.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        # self.label_graph_mdl_4.setText("")
-        # self.label_graph_mdl_4.setObjectName("label_graph_mdl_4")
-        # self.horizontalLayout_6.addWidget(self.label_graph_mdl_4)
+        self.graph_incomp_left = PlotWidget(Form)
+        self.graph_incomp_left.setSizePolicy(sizePolicy)
 
-        self.graph_incomp = PlotWidget(Form)
-        self.graph_incomp.setSizePolicy(sizePolicy)
+        self.graph_incomp_left.setBackground("w")      # w = white
+        self.graph_incomp_left.showGrid(x=True, y=True)
+        self.graph_incomp_left.setLabels(left='Percentage', bottom='Incomplite Left')
+        self.graph_incomp_left.setObjectName('graph_comp')
+        self.horizontalLayout_6.addWidget(self.graph_incomp_left)
 
-        self.graph_incomp.setBackground("w")      # w = white
-        self.graph_incomp.showGrid(x=True, y=True)
-        self.graph_incomp.setLabels(left='Percentage', bottom='Incomplite')
-        self.graph_incomp.setObjectName('graph_comp')
-        self.horizontalLayout_6.addWidget(self.graph_incomp)
+        self.incomplite_line_left = self.graph_incomp_left.plot([], pen=pg.mkPen(color=(187, 193, 0), width=8))              
 
-        self.incomplite_line = self.graph_incomp.plot([], pen=pg.mkPen(255, 0, 0))              
+
+
+        self.graph_comp_right = PlotWidget(Form)
+        sizePolicy.setHeightForWidth(self.graph_comp_right.sizePolicy().hasHeightForWidth())
+        self.graph_comp_right.setSizePolicy(sizePolicy)
+        self.graph_comp_right.setBackground("w")      # w = white
+        # self.graph_comp_right.drawForeground("k")
+        self.graph_comp_right.showGrid(x=True, y=True)
+        self.graph_comp_right.setLabels(left='Percentage', bottom='Complite Right')
+        self.graph_comp_right.setObjectName('graph_comp_right')
+        self.horizontalLayout_6.addWidget(self.graph_comp_right)
+
+        self.complite_line_right = self.graph_comp_right.plot([], pen=pg.mkPen(color=(8, 165, 0), width=8)) 
+
+        self.graph_incomp_right = PlotWidget(Form)
+        self.graph_incomp_right.setSizePolicy(sizePolicy)
+
+        self.graph_incomp_right.setBackground("w")      # w = white
+        self.graph_incomp_right.showGrid(x=True, y=True)
+        self.graph_incomp_right.setLabels(left='Percentage', bottom='Incomplite Right')
+        self.graph_incomp_right.setObjectName('graph_comp')
+        self.horizontalLayout_6.addWidget(self.graph_incomp_right)
+
+        self.incomplite_line_right = self.graph_incomp_right.plot([], pen=pg.mkPen(color=(200, 0, 0), width=8))              
 
         self.verticalLayout_3.addWidget(self.frame_21)
         self.frame_20 = QtWidgets.QFrame(self.frame_4)
@@ -628,17 +690,19 @@ class Ui_Form(QtWidgets.QWidget):
         qimg = QtGui.QImage(frame.data, w, h, bytes_per_line, QtGui.QImage.Format.Format_RGB888)
         return QtGui.QPixmap.fromImage(qimg)
 
-    def update_img(self, frame_ori, frame_pred, cal_com, cal_incom):
+    def update_img(self, frame_ori, frame_pred, cal_right, cal_left):
         img_ori = self.convert_img(frame_ori)
         img_pred = self.convert_img(frame_pred)
 
         img_ori = img_ori.scaled(self.label_ori.size())
         img_pred = img_pred.scaled(self.label_result.size())
 
-        self.label_complite.setText(f"{cal_com}")
-        self.label_incomp.setText(f"{cal_incom}")
-        self.complite.append(cal_com)
-        self.incomplite.append(cal_incom)
+        self.label_complite.setText(f"{cal_right[0] + cal_left[0]}")
+        self.label_incomp.setText(f"{cal_right[1] + cal_left[1]}")
+        self.complite_right.append(int(cal_right[0]))
+        self.incomplite_right.append(int(cal_right[1]))
+        self.complite_left.append(int(cal_left[0]))
+        self.incomplite_left.append(int(cal_left[1]))
 
         self.setDataGraph()
 
@@ -648,11 +712,15 @@ class Ui_Form(QtWidgets.QWidget):
         self.label_result.setPixmap(img_pred)
 
     def setDataGraph(self):
-        x_comp = np.arange(0, len(self.complite))
-        x_incom = np.arange(0, len(self.incomplite))
+        x_comp_left = np.arange(0, len(self.complite_left))
+        x_incom_left = np.arange(0, len(self.incomplite_left))
+        x_comp_right = np.arange(0, len(self.complite_right))
+        x_incom_right = np.arange(0, len(self.incomplite_right))
 
-        self.complite_line.setData(x_comp, self.complite)
-        self.incomplite_line.setData(x_incom, self.incomplite)
+        self.complite_line_left.setData(x_comp_left, self.complite_left)
+        self.incomplite_line_left.setData(x_incom_left, self.incomplite_left)
+        self.complite_line_right.setData(x_comp_right, self.complite_right)
+        self.incomplite_line_right.setData(x_incom_right, self.incomplite_right)
 
     def setIconPlay(self, condition):
         src = 'icon/play.png' if condition == 1 else 'icon/pause.png'
@@ -666,20 +734,22 @@ class Ui_Form(QtWidgets.QWidget):
         label.setPixmap((img.scaled(label.size())))
 
     def setupTable(self):
-        header = ["Complite", "Incomplite", "Total", "Km/m", "Information"]
+        header = ["Complite Right", "Incomplite Right", "Complite Left", "Incomplite Left", "Total", "Km/m", "Information"]
 
-        data = [ {header[i]: ' ' for i in range(5)} for _ in range(9)]  # hasilnya sama dgn komentar diatas
+        data = [ {header[i]: ' ' for i in range(7)} for _ in range(7)]  # hasilnya sama dgn komentar diatas
 
         self.tableView.setData(data)
         # self.tableView.saveAll()
 
         self.tableView.verticalHeader().setVisible(False)
 
-        self.tableView.setColumnWidth(0, 143)
-        self.tableView.setColumnWidth(1, 143)
-        self.tableView.setColumnWidth(2, 133)
-        self.tableView.setColumnWidth(3, 133)
-        self.tableView.setColumnWidth(5, 143)
+        self.tableView.setColumnWidth(0, 225)
+        self.tableView.setColumnWidth(1, 225)
+        self.tableView.setColumnWidth(2, 225)
+        self.tableView.setColumnWidth(3, 225)
+        self.tableView.setColumnWidth(4, 133)
+        self.tableView.setColumnWidth(5, 133)
+        self.tableView.setColumnWidth(6, 163)
 
         for row in range(self.tableView.rowCount()):
             for col in range(self.tableView.columnCount()):
@@ -701,37 +771,58 @@ class Ui_Form(QtWidgets.QWidget):
         print(t)
 
     def setDataTable(self):
-        max_frame = 20
-        hd = ["Complite", "Incomplite", "Total", "Km/m", "Information"]
-        ranges = len(self.complite) if len(self.complite) > len(self.incomplite) else len(self.incomplite)
+        max_frame = 15
+        hd = ["Complite Right", "Incomplite Right", "Complite Left", "Incomplite Left", "Total", "Km/m", "Information"]
+
+        # Ambil jumlah batch berdasarkan panjang data terbesar
+        total_data = max(len(self.complite_right), len(self.incomplite_left))
+        num_batches = (total_data + max_frame - 1) // max_frame  # pembulatan ke atas
+
         data = []
 
-        # penjelasan ada di fungsi looping
-        for i in range(0, ranges, max_frame):
-            num_com = sum(self.complite[i:i + max_frame])
-            num_incom = sum(self.incomplite[i:i + max_frame])
-            information = "Success" if num_incom == 0 else "Repair"
-            data.append({hd[0]: num_com, hd[1]: num_incom, hd[2]: num_com+num_incom, hd[3]: f"{i} Meter", hd[4]: information})
+        for batch_index in range(1, num_batches):
+            start = batch_index * max_frame
+            end = start + max_frame
 
-        # print(data)
+            num_com_r = sum(self.complite_right[start:end])
+            num_incom_r = sum(self.incomplite_right[start:end])
+            num_com_l = sum(self.complite_left[start:end])
+            num_incom_l = sum(self.incomplite_left[start:end])
+
+            total = num_com_r + num_incom_r + num_com_l + num_incom_l
+
+            # Ubah agar status "Success" hanya jika tidak ada incomplite
+            information = "Success" if (num_incom_r == 0 and num_incom_l == 0) else "Repair"
+
+            data.append({
+                hd[0]: num_com_r,
+                hd[1]: num_incom_r,
+                hd[2]: num_com_l,
+                hd[3]: num_incom_l,
+                hd[4]: total,
+                hd[5]: f"{batch_index * max_frame} Meter",  # Dimulai dari 0 untuk setiap batch
+                hd[6]: information
+            })
 
         self.tableView.setData(data)
-        # self.tableView.saveAll()
-
         self.tableView.verticalHeader().setVisible(False)
 
-        self.tableView.setColumnWidth(0, 143)
-        self.tableView.setColumnWidth(1, 143)
-        self.tableView.setColumnWidth(2, 133)
-        self.tableView.setColumnWidth(3, 133)
-        self.tableView.setColumnWidth(5, 143)
+        # Atur lebar kolom
+        self.tableView.setColumnWidth(0, 225)
+        self.tableView.setColumnWidth(1, 225)
+        self.tableView.setColumnWidth(2, 225)
+        self.tableView.setColumnWidth(3, 225)
+        self.tableView.setColumnWidth(4, 133)
+        self.tableView.setColumnWidth(5, 133)
+        self.tableView.setColumnWidth(6, 163)
 
+        # Rata tengah semua sel
         for row in range(self.tableView.rowCount()):
             for col in range(self.tableView.columnCount()):
                 item = self.tableView.item(row, col)
                 if item:
-
                     item.setTextAlignment(QtCore.Qt.AlignCenter)
+
 
     def a(self):
         t_com = len(self.complite)
